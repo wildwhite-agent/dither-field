@@ -7,7 +7,9 @@ let mouseActive = false;
 const RADIUS = 180;
 const PUSH_STRENGTH = 14;
 const RETURN_SPEED = 0.06;
-const CELL = 6;
+// responsive cell size — bigger on mobile for performance
+const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+const CELL = isMobile ? 10 : 6;
 
 // bayer 4x4 threshold matrix
 const bayer = [
@@ -94,6 +96,15 @@ document.addEventListener('mouseleave', () => {
   mouse.y = -9999;
   mouseActive = false;
 });
+
+document.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  mouse.x = e.touches[0].clientX;
+  mouse.y = e.touches[0].clientY;
+  mouseActive = true;
+  needsRender = true;
+  if (!animating) startLoop();
+}, { passive: false });
 
 document.addEventListener('touchmove', (e) => {
   e.preventDefault();
