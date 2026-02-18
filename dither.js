@@ -7,9 +7,7 @@ let mouseActive = false;
 const RADIUS = 180;
 const PUSH_STRENGTH = 14;
 const RETURN_SPEED = 0.06;
-// responsive cell size — bigger on mobile for performance
-const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-const CELL = isMobile ? 10 : 6;
+const CELL = 3;
 
 // bayer 4x4 threshold matrix
 const bayer = [
